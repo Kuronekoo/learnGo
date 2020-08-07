@@ -1,2 +1,3 @@
-!*.go
-!*.txt
+!**/*.go
+!**/*.txt
+!.gitingnore
