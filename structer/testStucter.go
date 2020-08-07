@@ -34,6 +34,7 @@ import "fmt"
 */
 func main() {
 	testStru()
+
 }
 
 func testStru() {
@@ -87,11 +88,24 @@ func testStru() {
 	// 必须初始化结构体的所有字段。
 	// 初始值的填充顺序必须与字段在结构体中的声明顺序一致。
 	// 该方式不能和键值初始化方式混用。
+	p9 := newPerson("张三", "深圳", 90)
+	fmt.Printf("%#v\n", p9) //&main.person{name:"张三", city:"沙河", age:90}
 
+	testMethod()
 }
 
 //没有初始化的结构体，其成员变量都是对应其类型的零值。
 type person struct {
 	name, city string
 	age        int8
+}
+
+//一个构造函数
+//因为struct是值类型，如果结构体比较复杂的话，值拷贝性能开销会比较大，所以该构造函数返回的是结构体指针类型。
+func newPerson(name, city string, age int8) *person {
+	return &person{
+		name: name,
+		city: city,
+		age:  age,
+	}
 }
