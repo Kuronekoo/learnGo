@@ -13,6 +13,8 @@ import (
 func main() {
 	countChineseWords()
 	printSin()
+	fmt.Println("------------student system -----------")
+	testStudentSystem()
 }
 
 func countChineseWords() {
@@ -74,4 +76,66 @@ func printSin() {
 	png.Encode(file, pic) //将image信息写入文件中
 	// 关闭文件
 	file.Close()
+}
+
+func testStudentSystem() {
+	class := newClassInstance()
+	s1 := newStudentInstance(1, 2, "zhangsan", 12.33)
+	s2 := newStudentInstance(2, 2, "lisi", 10.00)
+	s3 := newStudentInstance(3, 2, "wangwu", 1.33)
+	class.show()
+	class.addStu(s1)
+	class.addStu(s2)
+	class.addStu(s3)
+
+	class.show()
+
+	class.delStu(1)
+	class.show()
+
+	s4 := class.getStu(2)
+	fmt.Printf("add : %p , value :  %v \n", s4, s4)
+}
+
+type Student struct {
+	Id    int
+	Name  string
+	Age   int
+	Score float32
+}
+
+type Class struct {
+	students map[int]*Student
+}
+
+func newClassInstance() *Class {
+	students := make(map[int]*Student)
+	return &Class{
+		students: students,
+	}
+}
+
+func newStudentInstance(id, age int, name string, score float32) *Student {
+	return &Student{id, name, age, score}
+}
+
+func (c *Class) addStu(student *Student) {
+	c.students[student.Id] = student
+}
+func (c *Class) getStu(id int) *Student {
+	return c.students[id]
+}
+
+func (c *Class) delStu(id int) {
+	delete(c.students, id)
+}
+func (c *Class) show() {
+	fmt.Println("------------print class-----------")
+	if len(c.students) == 0 {
+		fmt.Println("empty class")
+		return
+	}
+	for key, val := range c.students {
+		fmt.Printf(" key : %v ,value : %v \n", key, val)
+	}
 }

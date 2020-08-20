@@ -210,6 +210,10 @@ func testSlice() {
 	arr := [5]int{1, 2, 3, 4, 5}
 	s := arr[1:3] // s := a[low:high]
 	//cap = len(arr)-1=5-1=4
+	for i := 0; i < len(s); i++ {
+		fmt.Println(i, s[i])
+	}
+
 	fmt.Printf("s's Type %T s:%v len(s):%v cap(s):%v\n", s, s, len(s), cap(s))
 
 	//可以省略切片表达式中的任何索引。省略了low则默认为0；省略了high则默认为切片操作数的长度:
