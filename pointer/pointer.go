@@ -23,8 +23,11 @@ import (
 
 */
 func main() {
+	fmt.Println("---------------testPoint-------------------")
 	testPoint()
+	fmt.Println("---------------newPoint-------------------")
 	newPoint()
+	fmt.Println("---------------fucFlag-------------------")
 	fucFlag()
 }
 
