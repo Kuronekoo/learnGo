@@ -146,8 +146,8 @@ func main() {
 	testChannel()
 	fmt.Println("--------------testWorkPool--------------")
 	testWorkPool()
-	fmt.Println("--------------testSelect--------------")
-	testSelect()
+	fmt.Println("--------------testSelectAndChannel--------------")
+	testSelectAndChannel()
 	fmt.Println("--------------testMutexLock--------------")
 	testMutexLock()
 	fmt.Println("--------------testSingleton--------------")
@@ -290,7 +290,7 @@ func testMutexLock() {
 
 }
 
-func testSelect() {
+func testSelectAndChannel() {
 	//通道是引用类型，通道类型的空值是nil。
 	var ch1 chan int  // 声明一个传递整型的通道
 	var ch2 chan bool // 声明一个传递布尔型的通道
@@ -301,7 +301,7 @@ func testSelect() {
 	//只要通道的容量大于零，那么该通道就是有缓冲的通道，通道的容量表示通道中能存放元素的数量。
 	//我们可以使用内置的len函数获取通道内元素的数量，使用cap函数获取通道的容量，虽然我们很少会这么做。
 	ch2 = make(chan bool, 1)
-
+	//往通道中放入数据
 	go func() {
 		ch1 <- 10
 		ch1 <- 10
@@ -319,9 +319,9 @@ func testSelect() {
 	for i := 0; i < 2; i++ {
 		select {
 		case x := <-ch1:
-			fmt.Println(x)
+			fmt.Println("channel ", x)
 		case x := <-ch2:
-			fmt.Println(x)
+			fmt.Println("channel ", x)
 		}
 	}
 }
