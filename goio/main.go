@@ -94,6 +94,7 @@ func downloadAndUnzip(downloadUrls []string) error {
 			}
 		}
 	}
+	return nil
 }
 func OriginGet(url string, headerMap map[string]string, timeOut int64) ([]byte, error) {
 	//创建client
